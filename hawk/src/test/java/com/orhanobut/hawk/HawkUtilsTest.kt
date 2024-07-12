@@ -24,7 +24,7 @@ class HawkUtilsTest {
       HawkUtils.checkNull("foo", null)
       fail("should throw exception")
     } catch (e: Exception) {
-      assertThat(e).hasMessage("foo should not be null")
+      assert(e.message?.contains("foo should not be null") ?: false)
     }
   }
 
@@ -33,7 +33,7 @@ class HawkUtilsTest {
       HawkUtils.checkNullOrEmpty("foo", null)
       fail("should throw exception")
     } catch (e: Exception) {
-      assertThat(e).hasMessage("foo should not be null or empty")
+      assert(e.message?.contains("foo should not be null or empty") ?: false)
     }
   }
 

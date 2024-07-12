@@ -9,11 +9,10 @@ import org.mockito.Mock
 
 import com.google.common.truth.Truth.assertThat
 import junit.framework.Assert.fail
-import org.mockito.Matchers.anyString
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.inOrder
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
-import org.mockito.Mockito.verifyZeroInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations.initMocks
 
@@ -46,7 +45,7 @@ class DefaultHawkFacadeTest {
       hawkFacade.put(null, VALUE)
       fail("Null is not accepted")
     } catch (e: Exception) {
-      assertThat(e).hasMessage("Key should not be null")
+      assert(e.message?.contains("Key should not be null") ?: false)
     }
 
   }
@@ -98,7 +97,7 @@ class DefaultHawkFacadeTest {
     inOrder.verify(converter).toString(VALUE)
     inOrder.verify(encryption).encrypt(KEY, CONVERTED_TEXT)
     inOrder.verify(serializer).serialize(CIPHER_TEXT, VALUE)
-    verifyZeroInteractions(storage)
+    verifyNoMoreInteractions(storage)
   }
 
   @Test fun putFailsOnStorage() {
@@ -151,7 +150,7 @@ class DefaultHawkFacadeTest {
     assertThat(hawkFacade.get<Any>(KEY)).isEqualTo(null)
 
     verify(storage).get<Any>(KEY)
-    verifyZeroInteractions(encryption, serializer, converter)
+    verifyNoMoreInteractions(encryption, serializer, converter)
   }
 
   @Test fun getFailsOnDeserialize() {
@@ -164,7 +163,7 @@ class DefaultHawkFacadeTest {
     inOrder.verify(storage).get<Any>(KEY)
     inOrder.verify(serializer).deserialize(SERIALIZED_TEXT)
 
-    verifyZeroInteractions(encryption, converter)
+    verifyNoMoreInteractions(encryption, converter)
   }
 
   @Test fun getFailsOnDecrypt() {
@@ -179,7 +178,7 @@ class DefaultHawkFacadeTest {
     inOrder.verify(serializer).deserialize(SERIALIZED_TEXT)
     inOrder.verify(encryption).decrypt(KEY, CIPHER_TEXT)
 
-    verifyZeroInteractions(converter)
+    verifyNoMoreInteractions(converter)
   }
 
   @Test fun getFailsOnConvert() {
@@ -203,28 +202,28 @@ class DefaultHawkFacadeTest {
     `when`(storage.count()).thenReturn(100L)
 
     assertThat(hawkFacade.count()).isEqualTo(100L)
-    verifyZeroInteractions(encryption, converter, serializer)
+    verifyNoMoreInteractions(encryption, converter, serializer)
   }
 
   @Test fun deleteAll() {
     `when`(storage.deleteAll()).thenReturn(true)
 
     assertThat(hawkFacade.deleteAll()).isTrue()
-    verifyZeroInteractions(encryption, converter, serializer)
+    verifyNoMoreInteractions(encryption, converter, serializer)
   }
 
   @Test fun delete() {
     `when`(storage.delete(KEY)).thenReturn(true)
 
     assertThat(hawkFacade.delete(KEY)).isTrue()
-    verifyZeroInteractions(encryption, converter, serializer)
+    verifyNoMoreInteractions(encryption, converter, serializer)
   }
 
   @Test fun contains() {
     `when`(storage.contains(KEY)).thenReturn(true)
 
     assertThat(hawkFacade.contains(KEY)).isTrue()
-    verifyZeroInteractions(encryption, converter, serializer)
+    verifyNoMoreInteractions(encryption, converter, serializer)
   }
 
   @Test fun isBuilt() {

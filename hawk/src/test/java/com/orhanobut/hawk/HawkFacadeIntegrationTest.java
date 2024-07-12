@@ -33,19 +33,29 @@ public class HawkFacadeIntegrationTest {
 
   @Test public void testSingleItem() {
     Hawk.put("boolean", true);
-    assertThat(Hawk.get("boolean")).isEqualTo(true);
+
+    Object hawkObject = Hawk.get("boolean");
+    assertThat(hawkObject).isEqualTo(true);
 
     Hawk.put("string", "string");
-    assertThat(Hawk.get("string")).isEqualTo("string");
+
+    hawkObject = Hawk.get("string");
+    assertThat(hawkObject).isEqualTo("string");
 
     Hawk.put("float", 1.5f);
-    assertThat(Hawk.get("float")).isEqualTo(1.5f);
+
+    hawkObject = Hawk.get("float");
+    assertThat(hawkObject).isEqualTo(1.5f);
 
     Hawk.put("integer", 10);
-    assertThat(Hawk.get("integer")).isEqualTo(10);
+
+    hawkObject = Hawk.get("integer");
+    assertThat(hawkObject).isEqualTo(10);
 
     Hawk.put("char", 'A');
-    assertThat(Hawk.get("char")).isEqualTo('A');
+
+    hawkObject = Hawk.get("char");
+    assertThat(hawkObject).isEqualTo('A');
 
     Hawk.put("object", new FooBar());
     FooBar fooBar = Hawk.get("object");

@@ -2,8 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+  compileSdk rootProject.ext.compileSdkVersion
 
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
@@ -15,24 +14,35 @@ android {
     textReport true
     textOutput 'stdout'
   }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  packaging {
+    jniLibs {
+      useLegacyPackaging true
+    }
+  }
+
+  namespace 'com.orhanobut.hawk'
 }
 
 dependencies {
-  api deps.conceal
-  implementation deps.gson
+  api 'com.facebook.conceal:conceal:2.0.2@aar'
+  implementation 'com.google.code.gson:gson:2.11.0'
 
-  testImplementation deps.junit
-  testImplementation deps.truth
-  testImplementation deps.robolectric
-  testImplementation deps.mockito
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation 'com.google.truth:truth:1.4.3'
+  testImplementation 'org.robolectric:robolectric:4.13'
+  testImplementation 'org.mockito:mockito-core:5.12.0'
   testImplementation deps.kotlin
 
-  androidTestImplementation deps.junit
-  androidTestImplementation deps.truth
-  androidTestImplementation deps.espressoRunner
-  androidTestImplementation deps.espressoRules
+  androidTestImplementation 'junit:junit:4.13.2'
+  androidTestImplementation 'com.google.truth:truth:1.4.3'
+  androidTestImplementation 'com.android.support.test:runner:1.0.2'
+  androidTestImplementation 'com.android.support.test:rules:1.0.2'
   androidTestImplementation deps.kotlin
 
 }
-
-apply from: rootProject.file('gradle/maven_push.gradle')

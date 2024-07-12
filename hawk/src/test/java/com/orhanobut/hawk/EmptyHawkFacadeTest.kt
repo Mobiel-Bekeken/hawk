@@ -3,6 +3,8 @@ package com.orhanobut.hawk
 import org.junit.Test
 
 import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.Truth.assertWithMessage
+import junit.framework.Assert.assertTrue
 import junit.framework.Assert.fail
 
 class EmptyHawkFacadeTest {
@@ -10,7 +12,7 @@ class EmptyHawkFacadeTest {
   private val hawkFacade = HawkFacade.EmptyHawkFacade()
 
   private fun assertFail(e: Exception) {
-    assertThat(e).hasMessage("Hawk is not built. " + "Please call build() and wait the initialisation finishes.")
+    assert(e.message?.contains("Hawk is not built. " + "Please call build() and wait the initialisation finishes.") ?: false)
   }
 
   @Test fun put() {

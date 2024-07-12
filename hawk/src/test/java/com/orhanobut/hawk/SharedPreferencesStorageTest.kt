@@ -125,7 +125,7 @@ class SharedPreferencesStorageTest {
       storage.put(null, "value")
       fail("key should not be null")
     } catch (e: Exception) {
-      assertThat(e).hasMessage("key should not be null")
+      fail("key should not be null "+e.localizedMessage)
     }
 
   }

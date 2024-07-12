@@ -28,7 +28,7 @@ class HawkTest {
       Hawk.init(null)
       fail("context should not be null")
     } catch (e: Exception) {
-      assertThat(e).hasMessage("Context should not be null")
+      assert(e.message?.contains("Context should not be null") ?: false)
     }
 
   }

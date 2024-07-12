@@ -1,11 +1,11 @@
 buildscript {
-  ext.kotlinVersion = '1.2.31'
+  ext.kotlinVersion = '2.0.0'
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.1.0'
+    classpath 'com.android.tools.build:gradle:8.5.0'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
   }
 }
@@ -13,7 +13,7 @@ buildscript {
 allprojects {
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
 }
 
@@ -38,6 +38,7 @@ subprojects { project ->
       check.dependsOn('checkstyle')
     }
   }
+
 }
 
 task clean(type: Delete) {
@@ -45,10 +46,9 @@ task clean(type: Delete) {
 }
 
 ext {
-  minSdkVersion = 15
-  targetSdkVersion = 27
-  compileSdkVersion = 27
-  buildToolsVersion = '27.0.3'
+  minSdkVersion = 25
+  targetSdkVersion = 34
+  compileSdkVersion = 34
   sourceCompatibilityVersion = JavaVersion.VERSION_1_7
   targetCompatibilityVersion = JavaVersion.VERSION_1_7
 }
