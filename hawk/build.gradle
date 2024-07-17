@@ -52,7 +52,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("../github.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
 
 def getVersionName = { ->
-  return "2.2" // Replace with version Name
+  return "2.2.1" // Replace with version Name
 }
 
 def getArtificatId = { ->
@@ -62,7 +62,7 @@ def getArtificatId = { ->
 publishing {
   publications {
     bar(MavenPublication) {
-      groupId 'com.orhanobut.hawk' // Replace with group ID
+      groupId 'com.orhanobut' // Replace with group ID
       artifactId getArtificatId()
       version getVersionName()
       artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
@@ -77,7 +77,7 @@ publishing {
         def artifactName = project.getName()
 
         // Artifact properties
-        groupId "com.orhanobut.hawk"
+        groupId "com.orhanobut"
         version = libVersion
         artifactId variant.name == 'debug' ? artifactName + '-dev' : artifactName
         version getVersionName()
