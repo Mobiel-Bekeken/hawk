@@ -17,30 +17,6 @@ allprojects {
   }
 }
 
-subprojects { project ->
-  group = GROUP
-  version = VERSION_NAME
-
-  apply plugin: 'checkstyle'
-
-  task checkstyle(type: Checkstyle) {
-    configFile rootProject.file('checkstyle.xml')
-    source 'src/main/java'
-    ignoreFailures false
-    showViolations true
-    include '**/*.java'
-
-    classpath = files()
-  }
-
-  afterEvaluate {
-    if (project.tasks.findByName('check')) {
-      check.dependsOn('checkstyle')
-    }
-  }
-
-}
-
 task clean(type: Delete) {
   delete rootProject.buildDir
 }

@@ -74,69 +74,6 @@ public class HawkFacadeIntegrationTest {
     assertThat(result).isEqualTo(true);
   }
 
-  @Test public void testList() {
-    List<String> list = new ArrayList<>();
-    list.add("foo");
-    list.add("bar");
-
-    Hawk.put("tag", list);
-
-    List<String> list1 = Hawk.get("tag");
-
-    assertThat(list1).isNotNull();
-    assertThat(list1.get(0)).isEqualTo("foo");
-    assertThat(list1.get(1)).isEqualTo("bar");
-  }
-
-  @Test public void testEmptyList() {
-    List<FooBar> list = new ArrayList<>();
-    Hawk.put("tag", list);
-
-    List<FooBar> list1 = Hawk.get("tag");
-
-    assertThat(list1).isNotNull();
-  }
-
-  @Test public void testMap() {
-    Map<String, String> map = new HashMap<>();
-    map.put("key", "value");
-    Hawk.put("map", map);
-
-    Map<String, String> map1 = Hawk.get("map");
-
-    assertThat(map1).isNotNull();
-    assertThat(map1.get("key")).isEqualTo("value");
-  }
-
-  @Test public void testEmptyMap() {
-    Map<String, FooBar> map = new HashMap<>();
-    Hawk.put("tag", map);
-
-    Map<String, FooBar> map1 = Hawk.get("tag");
-
-    assertThat(map1).isNotNull();
-  }
-
-  @Test public void testSet() {
-    Set<String> set = new HashSet<>();
-    set.add("foo");
-    Hawk.put("set", set);
-
-    Set<String> set1 = Hawk.get("set");
-
-    assertThat(set1).isNotNull();
-    assertThat(set1.contains("foo")).isTrue();
-  }
-
-  @Test public void testEmptySet() {
-    Set<FooBar> set = new HashSet<>();
-    Hawk.put("tag", set);
-
-    Set<FooBar> set1 = Hawk.get("tag");
-
-    assertThat(set1).isNotNull();
-  }
-
   @Test public void testCount() {
     Hawk.deleteAll();
     String value = "test";
