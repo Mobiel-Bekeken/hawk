@@ -21,12 +21,6 @@ android {
     targetCompatibility JavaVersion.VERSION_17
   }
 
-  packaging {
-    jniLibs {
-      useLegacyPackaging true
-    }
-  }
-
   namespace 'com.orhanobut.hawk'
 }
 
@@ -52,7 +46,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("../github.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
 
 def getVersionName = { ->
-  return "2.2.1" // Replace with version Name
+  return "2.2.2" // Replace with version Name
 }
 
 def getArtificatId = { ->
