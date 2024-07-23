@@ -30,3 +30,8 @@
   void set*(***);
   *** get*();
 }
+
+# Facebook conceal
+-keep class com.facebook.cypher.** { *; }
+-keep class com.facebook.crypto.** { *; }
+-keep class com.facebook.android.crypto.** { *; }
